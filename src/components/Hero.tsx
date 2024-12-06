@@ -1,11 +1,44 @@
 'use client'
 
-import Link from 'next/link'
-import FishBackground from './FishBackground'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import FishBackground from './FishBackground';
 
 export default function Hero() {
+  const [jingleAudio] = useState(() => new Audio('/jingle_final.mp3'));
+  const [podcastAudio] = useState(() => new Audio('/podcast.mp3'));
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  const handleUserInteraction = () => {
+    if (!userInteracted) {
+      setUserInteracted(true);
+      jingleAudio.play().catch(() => {
+        console.error("Le jingle n'a pas pu être lu immédiatement.");
+      });
+    }
+  };
+
+  const handleJingleClick = () => {
+    if (jingleAudio.paused) {
+      jingleAudio.play();
+    } else {
+      jingleAudio.pause();
+    }
+  };
+
+  const handlePodcastClick = () => {
+    if (podcastAudio.paused) {
+      podcastAudio.play();
+    } else {
+      podcastAudio.pause();
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      onClick={handleUserInteraction} // Capture une interaction utilisateur
+    >
       {/* Background avec dégradé */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900 via-blue-900/80 to-blue-900/60"></div>
@@ -28,14 +61,14 @@ export default function Hero() {
             l'Océan et Vous
           </span>
         </h1>
-        
+
         <p className="mt-6 text-xl sm:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
           Une expérience interactive pour comprendre les parallèles fascinants entre l'océan et le corps humain
         </p>
 
         {/* Boutons CTA */}
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Link 
+          <Link
             href="#explorer"
             className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 text-white font-medium transition-transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent"
           >
@@ -59,7 +92,7 @@ export default function Hero() {
             { number: '50%', label: "de l'oxygène provient des océans" },
             { number: '97%', label: "de l'eau sur Terre est dans les océans" }
           ].map((stat, index) => (
-            <div 
+            <div
               key={index}
               className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 transform hover:scale-105 transition-all"
             >
@@ -76,6 +109,23 @@ export default function Hero() {
           </svg>
         </div>
       </div>
+
+      {/* Icônes audio */}
+      <div className="absolute bottom-12 right-4 flex flex-col gap-2">
+      <div className="absolute -top-10 right-2 bottom-2 text-white opacity-80 text-sm">Écoutez le jingle</div>
+        <button
+          onClick={handleJingleClick}
+          className="w-10 h-10 flex items-center right-5 justify-center rounded-full bg-blue-500 text-white shadow-md hover:bg-blue-600"
+        >
+          🎵
+        </button>
+        <button
+          onClick={handlePodcastClick}
+          className="w-10 h-10 flex items-center right-5 justify-center rounded-full bg-white-500 text-white shadow-md hover:bg-white-600"
+        >
+          🎙️
+        </button>
+      </div>
     </section>
-  )
+  );
 }
