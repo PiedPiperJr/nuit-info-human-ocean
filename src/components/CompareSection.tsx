@@ -39,9 +39,9 @@ export default function CompareSection() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 p-1">
+            <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-900 to-teal-500 p-1">
               <div className="w-full h-full rounded-xl bg-white">
-                {/* Placeholder for 3D visualization */}
+                <img src='cover.png' className=""/>
               </div>
             </div>
           </div>
