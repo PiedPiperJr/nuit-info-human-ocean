@@ -112,15 +112,16 @@ export default function Hero() {
 
       {/* Icônes audio */}
       <div className="absolute bottom-12 right-4 flex flex-col gap-2">
+      <div className="absolute -top-10 right-2 bottom-2 text-white opacity-80 text-sm">Écoutez le jingle</div>
         <button
           onClick={handleJingleClick}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 text-white shadow-md hover:bg-blue-600"
+          className="w-10 h-10 flex items-center right-5 justify-center rounded-full bg-blue-500 text-white shadow-md hover:bg-blue-600"
         >
           🎵
         </button>
         <button
           onClick={handlePodcastClick}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-white-500 text-white shadow-md hover:bg-white-600"
+          className="w-10 h-10 flex items-center right-5 justify-center rounded-full bg-white-500 text-white shadow-md hover:bg-white-600"
         >
           🎙️
         </button>
