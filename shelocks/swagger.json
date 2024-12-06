@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Suivi",
+    "version": "1.0.0",
+    "description": "Documentation de l'API pour le suivi des événements."
+  },
+  "paths": {
+    "/track": {
+      "post": {
+        "summary": "Envoie des données de suivi au serveur",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "eventType": { "type": "string" },
+                  "position": {
+                    "type": "object",
+                    "properties": {
+                      "x": { "type": "integer" },
+                      "y": { "type": "integer" }
+                    }
+                  },
+                  "timestamp": { "type": "integer" },
+                  "speed": {
+                    "type": "object",
+                    "properties": {
+                      "x": { "type": "integer" },
+                      "y": { "type": "integer" },
+                      "timeDelta": { "type": "integer" }
+                    }
+                  },
+                  "page": { "type": "string" },
+                  "deviceInfo": {
+                    "$ref": "#/components/schemas/DeviceInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Données envoyées avec succès"
+          },
+          "400": {
+            "description": "Erreur lors de l'envoi des données"
+          }
+        }
+      }
+    },
+    "/device-info": {
+      "get": {
+        "summary": "Récupère les informations sur l'appareil",
+        "responses": {
+          "200": {
+            "description": "Informations sur l'appareil récupérées avec succès"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DeviceInfo": {
+        "type": "object",
+        "properties": {
+          "userAgent": { "type": "string" },
+          "platform": { "type": "string" },
+          "language": { "type": "string" },
+          "screen": {
+            "type": "object",
+            "properties": {
+              "width": { "type": "integer" },
+              "height": { "type": "integer" },
+              "availWidth": { "type": "integer" },
+              "availHeight": { "type": "integer" },
+              "colorDepth": { "type": "integer" },
+              "pixelDepth": { "type": "integer" }
+            }
+          },
+          "viewport": {
+            "type": "object",
+            "properties": {
+              "width": { "type": "integer" },
+              "height": { "type": "integer" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
