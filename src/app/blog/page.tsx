@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -215,7 +216,6 @@ export default function BlogPage() {
               </div>
             </div>
           </div>
-
           {/* Contenu principal - Liste des Articles */}
           <div className="lg:w-3/4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
