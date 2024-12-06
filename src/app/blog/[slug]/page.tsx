@@ -2,62 +2,98 @@
 
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { getBlogDetail, Blog } from '@/services/api'
-import { useEffect, useState } from 'react'
 
-interface ExtendedBlog extends Blog {
-  readTime: string;
-  category: string;
-  imageUrl: string;
-  tags: string[];
-  impactLevel: 'high' | 'medium' | 'low';
-  likes: number;
-  isLiked: boolean;
+interface BlogPost {
+  id: string
+  slug: string
+  title: string
+  content: string
+  author: string
+  date: string
+  readTime: string
+  category: string
+  imageUrl: string
+  tags: string[]
+  impactLevel: 'high' | 'medium' | 'low'
+  likes: number
+  isLiked: boolean
 }
 
-// Fonction pour enrichir les données de l'API
-const enrichBlogData = (blog: Blog): ExtendedBlog => {
-  return {
-    ...blog,
+async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  
+  // Simulation d'un appel API
+  const demoPost: BlogPost = {
+    id: '1',
+    slug: 'protection-recifs-coralliens',
+    title: 'La Protection des Récifs Coralliens en Méditerranée',
+    content: `
+      Les récifs coralliens de la Méditerranée sont parmi les écosystèmes les plus précieux et les plus menacés de notre planète. 
+      Face aux défis du changement climatique, de la pollution et de la surpêche, ces habitats uniques nécessitent une protection urgente.
+
+      ## L'importance des récifs coralliens
+
+      Les récifs coralliens méditerranéens jouent un rôle crucial dans :
+      - La préservation de la biodiversité marine
+      - La protection des côtes contre l'érosion
+      - Le soutien des économies locales à travers le tourisme
+      - Le maintien des stocks de poissons
+
+      ## Les menaces actuelles
+
+      Plusieurs facteurs menacent la survie de ces écosystèmes :
+      1. L'augmentation de la température des océans
+      2. L'acidification des eaux
+      3. La pollution plastique
+      4. La surpêche
+      5. Le développement côtier non durable
+
+      ## Actions de conservation
+
+      Des initiatives locales et internationales sont mises en place pour protéger ces écosystèmes vitaux :
+      - Création d'aires marines protégées
+      - Programmes de restauration des coraux
+      - Sensibilisation des communautés locales
+      - Développement de pratiques touristiques durables
+
+      ## Comment vous pouvez aider
+
+      Chacun peut contribuer à la protection des récifs coralliens :
+      1. Utiliser des produits solaires respectueux des océans
+      2. Réduire sa consommation de plastique
+      3. Soutenir les organisations de conservation marine
+      4. Pratiquer un tourisme responsable
+      
+      ## Conclusion
+
+      La protection des récifs coralliens méditerranéens est un défi qui nécessite une action collective. 
+      Chaque geste compte dans la préservation de ces trésors naturels pour les générations futures.
+    `,
+    author: 'Dr. Marine Dubois',
+    date: '2 décembre 2024',
     readTime: '8 min',
     category: 'Écosystèmes Marins',
     imageUrl: '/corails.jpg',
-    tags: ['Conservation', 'Océans'],
-    impactLevel: 'high' as const,
-    likes: 0,
+    tags: ['Récifs Coralliens', 'Conservation', 'Méditerranée', 'Biodiversité'],
+    impactLevel: 'high',
+    likes: 124,
     isLiked: false
   }
+
+  // Simuler un délai de chargement
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  // Retourner l'article si le slug correspond
+  if (slug === demoPost.slug) {
+    return demoPost
+  }
+
+  return null
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const [post, setPost] = useState<ExtendedBlog | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const loadPost = async () => {
-      try {
-        // Note: L'API actuelle utilise des IDs numériques, nous devrons adapter cela pour les slugs
-        const apiPost = await getBlogDetail(parseInt(params.slug))
-        const enrichedPost = enrichBlogData(apiPost)
-        setPost(enrichedPost)
-      } catch (error) {
-        console.error('Erreur lors du chargement de l\'article:', error)
-        notFound()
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    loadPost()
-  }, [params.slug])
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-blue-500">Chargement de l'article...</div>
-      </div>
-    )
-  }
+export default async function BlogPostPage(props : { params : Promise<{ slug: string }> }) {
+  
+  const { slug } = await props.params;
+  const post = await getBlogPost(slug)
 
   if (!post) {
     notFound()
@@ -73,11 +109,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <span className="text-gray-300">•</span>
             <span className="text-gray-600">{post.readTime}</span>
             <span className="text-gray-300">•</span>
-            <span className="text-gray-600">{new Date(post.created_at).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            })}</span>
+            <span className="text-gray-600">{post.date}</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             {post.title}
@@ -85,7 +117,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div>
-                <p className="font-medium text-gray-900">Auteur</p>
+                <p className="font-medium text-gray-900">{post.author}</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -125,7 +157,41 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
         {/* Contenu de l'article */}
         <div className="prose prose-lg max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          {post.content.split('\n').map((paragraph, index) => {
+            if (paragraph.startsWith('#')) {
+              const level = paragraph.match(/^#+/)?.[0].length || 1
+              const text = paragraph.replace(/^#+\s*/, '')
+              const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
+              return <HeadingTag key={index} className="text-gray-900 font-bold mb-4">{text}</HeadingTag>
+            }
+            if (paragraph.trim().startsWith('-')) {
+              return (
+                <ul key={index} className="list-disc pl-6 mb-4">
+                  {paragraph.split('\n').map((item, i) => (
+                    <li key={i} className="text-gray-700">
+                      {item.replace(/^-\s*/, '')}
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+            if (paragraph.trim().match(/^\d+\./)) {
+              return (
+                <ol key={index} className="list-decimal pl-6 mb-4">
+                  {paragraph.split('\n').map((item, i) => (
+                    <li key={i} className="text-gray-700">
+                      {item.replace(/^\d+\.\s*/, '')}
+                    </li>
+                  ))}
+                </ol>
+              )
+            }
+            return paragraph.trim() && (
+              <p key={index} className="text-gray-700 mb-4">
+                {paragraph}
+              </p>
+            )
+          })}
         </div>
 
         {/* Footer de l'article */}
