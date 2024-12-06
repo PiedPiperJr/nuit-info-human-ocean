@@ -25,6 +25,22 @@ export default function ExplorerPage() {
           <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-[url('/wave.svg')] bg-repeat-x animate-wave"></div>
           <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-[url('/wave.svg')] bg-repeat-x animate-wave-slow opacity-50 -scale-x-100"></div>
         </div>
+        <div className="absolute inset-0 -z-10">
+          {/* Image de fond */}
+          <Image
+            src="/ocean-bg.jpg"
+            alt="Ocean background"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dégradés par-dessus l'image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 via-blue-900/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 via-transparent to-blue-900/50"></div>
+          {/* Vagues animées */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-[url('/wave.svg')] bg-repeat-x animate-wave"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-[url('/wave.svg')] bg-repeat-x animate-wave-slow opacity-50 -scale-x-100"></div>
+        </div>
       <div className="min-h-screen  text-white">
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 text-center">
