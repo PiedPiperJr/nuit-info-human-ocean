@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,7 +61,7 @@ export default function Header() {
     <>
       <header 
         className={`fixed w-full z-50 transition-all duration-500 ${
-          isScrolled 
+          isScrolled || pathname !== '/' 
             ? 'bg-white/90 backdrop-blur-md shadow-lg' 
             : 'bg-transparent'
         }`}
@@ -72,14 +73,17 @@ export default function Header() {
               href="/" 
               className="group flex items-center space-x-3 transition-transform duration-300 hover:scale-105"
             >
-              <div className="relative w-10 h-10">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full animate-pulse"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">H</span>
-                </div>
+              <div className="relative w-20 h-20  ">
+              <Image 
+                src="/logoApp2.png" 
+                alt="Human Ocean Logo" 
+                width={80} 
+                height={80} 
+                className="rounded-full"
+              />
               </div>
               <span className={`text-xl font-bold transition-colors duration-300 ${
-                isScrolled ? 'text-gray-900' : 'text-white'
+                isScrolled || pathname !== '/' ? 'text-gray-900' : 'text-white'
               } group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-teal-600 group-hover:bg-clip-text group-hover:text-transparent`}>
                 Human Ocean
               </span>
@@ -94,13 +98,13 @@ export default function Header() {
                     key={item.name}
                     href={item.href}
                     className={`relative group px-4 py-2 rounded-full transition-all duration-300 ease-in-out flex items-center space-x-2 ${
-                      isScrolled 
+                      isScrolled || pathname !== '/' 
                         ? isActive
                           ? 'bg-blue-50 text-blue-600 ring-2 ring-blue-600'
                           : 'text-gray-700 hover:bg-gray-50 hover:ring-2 hover:ring-gray-200'
                         : isActive
                           ? 'bg-white/20 text-white ring-2 ring-white'
-                          : 'text-white hover:bg-white/10 hover:ring-2 hover:ring-white/50'
+                          : 'text-white hover:bg-white/10 hover:ring-2 hover:ring-white/30'
                     }`}
                   >
                     <span className="transition-transform duration-300 group-hover:scale-110">
@@ -130,18 +134,26 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-                isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+                isScrolled || pathname !== '/' 
+                  ? 'text-gray-600 hover:bg-gray-100' 
+                  : 'text-white hover:bg-white/10'
               }`}
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span className={`block w-5 h-0.5 transition-all duration-300 ${
-                  isScrolled ? 'bg-gray-600' : 'bg-white'
+                  isScrolled || pathname !== '/' 
+                    ? 'bg-gray-600' 
+                    : 'bg-white'
                 } ${isMobileMenuOpen ? 'rotate-45 translate-y-0.5' : '-translate-y-1'}`} />
                 <span className={`block w-5 h-0.5 transition-all duration-300 ${
-                  isScrolled ? 'bg-gray-600' : 'bg-white'
+                  isScrolled || pathname !== '/' 
+                    ? 'bg-gray-600' 
+                    : 'bg-white'
                 } ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
                 <span className={`block w-5 h-0.5 transition-all duration-300 ${
-                  isScrolled ? 'bg-gray-600' : 'bg-white'
+                  isScrolled || pathname !== '/' 
+                    ? 'bg-gray-600' 
+                    : 'bg-white'
                 } ${isMobileMenuOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1'}`} />
               </div>
             </button>
@@ -162,13 +174,13 @@ export default function Header() {
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-                      isScrolled
+                      isScrolled || pathname !== '/' 
                         ? isActive
                           ? 'bg-blue-50 text-blue-600 ring-2 ring-blue-600'
                           : 'text-gray-700 hover:bg-gray-50 hover:ring-2 hover:ring-gray-200'
                         : isActive
                           ? 'bg-white/20 text-white ring-2 ring-white'
-                          : 'text-white hover:bg-white/10 hover:ring-2 hover:ring-white/50'
+                          : 'text-white hover:bg-white/10 hover:ring-2 hover:ring-white/30'
                     }`}
                   >
                     {item.icon}
@@ -178,7 +190,7 @@ export default function Header() {
               })}
               <button className={`
                 mt-4 w-full px-6 py-3 rounded-xl font-medium transition-all duration-300 ring-2
-                ${isScrolled
+                ${isScrolled || pathname !== '/' 
                   ? 'bg-blue-600 text-white ring-blue-600 hover:bg-blue-700 hover:ring-blue-700'
                   : 'bg-white/20 text-white ring-white/50 hover:bg-white/30 hover:ring-white'
                 }
