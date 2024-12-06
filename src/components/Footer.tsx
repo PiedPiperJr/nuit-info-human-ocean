@@ -43,7 +43,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">À Propos</h3>
             <p className="text-gray-400">
-              Projet réalisé dans le cadre de la Nuit de l'Info 2023.
+              Projet réalisé dans le cadre de la Nuit de l'Info 2024.
             </p>
             <div className="mt-4 flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white">
