@@ -1,4 +1,7 @@
 'use client';
+import ocean from "../blog/ocean image/ocean2.jpg"
+import ocean1 from "../blog/ocean image/ocean.jpg"
+
 
 export default function BlogPage() {
   const articles = [
@@ -7,59 +10,45 @@ export default function BlogPage() {
       excerpt: "Découvrez comment les courants marins jouent un rôle similaire aux vaisseaux sanguins...",
       date: "2 Dec 2023",
       category: "Océanographie",
-      imageUrl: "/images/ocean-current.jpg"
+      imageUrl: ocean1
     },
     {
       title: "Le système immunitaire des océans",
       excerpt: "Les océans ont leur propre façon de se défendre contre les polluants...",
       date: "1 Dec 2023",
       category: "Écologie",
-      imageUrl: "/images/ocean-health.jpg"
+      imageUrl: ocean1
     },
     {
       title: "La respiration des océans",
       excerpt: "Comment les océans 'respirent' et échangent des gaz avec l'atmosphère...",
       date: "30 Nov 2023",
       category: "Environnement",
-      imageUrl: "/images/ocean-breath.jpg"
+      imageUrl: ocean1
     }
   ];
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-12">Blog</h1>
+    <div className="min-h-screen ">
+      <div className="max-w-7xl mx-auto flex flex-col">
+        <div className="bg-backimg">
+          <img src={ocean.src} alt="Example" className="w-full" />    
         
-        {/* Featured Article */}
-        <div className="mb-12 bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="md:flex">
-            <div className="md:flex-shrink-0">
-              <div className="h-48 w-full md:w-64 bg-gray-200"></div>
-            </div>
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-blue-600 font-semibold">
-                À la une
-              </div>
-              <h2 className="mt-2 text-2xl font-semibold text-gray-900">
-                Les parallèles fascinants entre l'océan et le corps humain
-              </h2>
-              <p className="mt-3 text-gray-600">
-                Une exploration approfondie des similitudes entre les systèmes océaniques et le corps humain...
-              </p>
-              <button className="mt-4 text-blue-600 hover:text-blue-800">
-                Lire la suite →
-              </button>
-            </div>
+          {/* Featured Article */}
+          <div className="mb-12 bg-white rounded-x6 shadow-lg overflow-hidden flex justify-center items-center">
+            <h1 className="text-4xl font-bold text-center mb-12">Blog</h1>          
           </div>
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pl-10 pr-10">
           {articles.map((article, index) => (
-            <article key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="h-48 bg-gray-200"></div>
-              <div className="p-6">
-                <div className="flex items-center text-sm text-gray-600 mb-2">
+            <article key={index} className="bg-white rounded-xl gap-10 shadow-lg flex flex-col">
+              <div className="h-48 bg-gray-200 rounded-yl" >
+                <img src={article.imageUrl.src} alt="Example" className="w-full" />
+              </div>
+              <div className="p-6 flex flex-col">
+                <div className="flex items-center text-sm text-gray-600 mb-2 justify-center">
                   <span>{article.date}</span>
                   <span className="mx-2">•</span>
                   <span>{article.category}</span>
