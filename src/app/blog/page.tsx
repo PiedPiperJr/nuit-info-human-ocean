@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -38,7 +37,7 @@ export default function BlogPage() {
         date: '2 décembre 2024',
         readTime: '8 min',
         category: 'Écosystèmes Marins',
-        imageUrl: '/public/corails.jpg',
+        imageUrl: '/corails.jpg',
         tags: ['Récifs Coralliens', 'Conservation'],
         impactLevel: 'high',
         likes: 124,
@@ -53,7 +52,7 @@ export default function BlogPage() {
         date: '1 décembre 2024',
         readTime: '6 min',
         category: 'Pollution Marine',
-        imageUrl: '/images/plastic-pollution.jpg',
+        imageUrl: '/plastique.jpg',
         tags: ['Pollution', 'Solutions'],
         impactLevel: 'high',
         likes: 89,
@@ -68,7 +67,7 @@ export default function BlogPage() {
         date: '30 novembre 2024',
         readTime: '10 min',
         category: 'Biodiversité',
-        imageUrl: '/images/marine-biodiversity.jpg',
+        imageUrl: '/biod.jpeg',
         tags: ['Biodiversité', 'Conservation'],
         impactLevel: 'medium',
         likes: 156,
@@ -105,7 +104,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* En-tête */}
-        <div className="text-center mb-12">
+        <div className="text-center mt-12 mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Blog Océanique
           </h1>

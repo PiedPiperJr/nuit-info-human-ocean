@@ -447,15 +447,18 @@ export default function EcoProfilePage() {
               <h3 className="text-xl font-semibold mb-4 text-gray-900">Badges d'Impact</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: "Gardien des Océans", icon: "🌊", level: "Or" },
-                  { name: "Protecteur Marin", icon: "🐋", level: "Argent" },
-                  { name: "Éco-Warrior", icon: "🛡️", level: "Bronze" },
-                  { name: "Guide Écologique", icon: "🎯", level: "Or" }
+                  { name: "Gardien des Océans", icon: "🌊", level: "Or", description: "Protection des écosystèmes marins", date: "Décembre 2024" },
+                  { name: "Protecteur Marin", icon: "🐋", level: "Argent", description: "Sauvegarde des espèces", date: "Novembre 2024" },
+                  { name: "Éco-Warrior", icon: "🛡️", level: "Bronze", description: "Lutte contre la pollution", date: "Octobre 2024" },
+                  { name: "Guide Écologique", icon: "🎯", level: "Or", description: "Sensibilisation réussie", date: "Septembre 2024" }
                 ].map((badge, index) => (
                   <div key={index} className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl text-center">
                     <span className="text-3xl mb-2 block">{badge.icon}</span>
                     <h4 className="font-medium text-purple-900">{badge.name}</h4>
                     <p className="text-sm text-purple-700 mt-1">{badge.description}</p>
+                    <div className="mt-2 inline-block px-2 py-1 bg-purple-200 rounded-full">
+                      <p className="text-xs text-purple-800">{badge.level}</p>
+                    </div>
                     <p className="text-xs text-purple-600 mt-2">{badge.date}</p>
                   </div>
                 ))}
@@ -687,8 +690,8 @@ export default function EcoProfilePage() {
             </div>
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">Marine Dupont</h1>
-            <p className="text-xl text-gray-600">Éco-Aventurière</p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">Pied Piper Jr.</h1>
+            <p className="text-xl text-gray-600">Éco-Aventurier</p>
             <div className="mt-4 flex space-x-4">
               <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
                 Niveau {userProgress.level}
