@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ Le Restaurant du Chaos 🍽️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Sans+MS&family=Papyrus&family=Impact&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .rotating-title {
+            font-size: 48px;
+            font-family: 'Impact', sans-serif;
+            color: #00698f;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .moving-menu {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            animation: move 5s linear infinite;
+        }
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        .menu-item {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+            background-color: #ff99cc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background-color: #ff66cc;
+        }
+        .menu-section {
+            margin-top: 40px;
+        }
+        .blinking-text {
+            font-size: 36px;
+            font-family: 'Impact', sans-serif;
+            color: #00698f;
+            animation: blink 2s linear infinite;
+        }
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .menu-item-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .menu-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .random-font-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .random-font-list li {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00698f;
+            margin-bottom: 10px;
+        }
+        .random-font-list li:nth-child(odd) {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+        }
+        .reservation-form {
+            margin-top: 40px;
+        }
+        .diagonal-text {
+            font-size: 36px;
+            font-family: 'Impact', sans-serif;
+            color: #00698f;
+            transform: rotate(-45deg);
+            margin-left: -20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00698f;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="date"] {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00698f;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            width: 100%;
+        }
+        .running-input {
+            animation: run 10s linear infinite;
+        }
+        @keyframes run {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+        .upside-down-input {
+            transform: rotate(180deg);
+        }
+        .spinning-input {
+            animation: spin 5s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .shrinking-button {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+            background-color: #ff99cc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            animation: shrink 5s linear infinite;
+        }
+        @keyframes shrink {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .chaos-footer {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .spinning-social {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .social-link {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+            background-color: #ff99cc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            animation: spin 5s linear infinite;
+        }
+        .wavy-text {
+            font-size: 36px;
+            font-family: 'Impact', sans-serif;
+            color: #00698f;
+            margin-bottom: 20px;
+        }
+        .wavy-text span {
+            display: inline-block;
+            animation: wave 2s linear infinite;
+        }
+        @keyframes wave {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        .random-hours {
+            margin-bottom: 20px;
+        }
+        .random-hours p {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00698f;
+            margin-bottom: 10px;
+        }
+        .address-chaos {
+            margin-bottom: 20px;
+        }
+        .glitch-text {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+            animation: glitch 2s linear infinite;
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        }
+        .mirror-text {
+            font-size: 24px;
+            font-family: 'Papyrus', sans-serif;
+            color: #660066;
+            transform: scaleX(-1);
+        }
+        .rainbow-text {
+            font-size: 36px;
+            font-family: 'Impact', sans-serif;
+            color: #00698f;
+            animation: rainbow 5s linear infinite;
+        }
+        @keyframes rainbow {
+            0% {
+                color: #ff0000;
+            }
+            20% {
+                color: #ffa500;
+            }
+            40% {
+                color: #ffff00;
+            }
+            60% {
+                color: #008000;
+            }
+            80% {
+                color: #0000ff;
+            }
+            100% {
+                color: #00698f;
+            }
+        }
+        .legal-nonsense {
+            margin-bottom: 20px;
+        }
+        .reverse-text {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', cursive;
+            color: #00698f;
+            animation: reverse 5s linear infinite;
+        }
+        @keyframes reverse {
+            0% {
+                transform: scaleX(1);
+            }
+            100% {
+                transform: scaleX(-1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="rotating-title">Le Restaurant du Chaos</h1>
+        
+        <nav class="moving-menu">
+            <button class="menu-item">MENU QUI BOUGE</button>
+            <button class="menu-item">RÉSERVATIONS</button>
+            <button class="menu-item">À PROPOS</button>
+        </nav>
+
+        <div class="menu-section">
+            <h2 class="blinking-text">Notre Menu Délirant</h2>
+            <div class="menu-item-container">
+                <div class="menu-card">
+                    <h3>Entrées qui n'en finissent pas</h3>
+                    <ul class="random-font-list">
+                        <li>Soupe aux lettres dansantes - ???€</li>
+                        <li>Salade qui fuit - ∞€</li>
+                        <li>Pain perdu (littéralement) - 404€</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="reservation-form">
+            <h2 class="diagonal-text">Réservez (si vous pouvez)</h2>
+            <form id="impossible-form">
+                <div class="form-group">
+                    <label for="name">Votre nom (minimum 42 caractères):</label>
+                    <input type="text" id="name" class="running-input" minlength="42" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date (uniquement les jours qui n'existent pas):</label>
+                    <input type="date" id="date" class="upside-down-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Nombre de convives (en binaire):</label>
+                    <input type="text" id="guests" pattern="[01]+" class="spinning-input" required>
+                </div>
+                <button type="submit" class="shrinking-button">Tenter de Réserver</button>
+            </form>
+        </div>
+    </div>
+    <footer class="chaos-footer">
+        <div class="footer-content">
+            <div class="spinning-social">
+                <a href="#" class="social-link">📱</a>
+                <a href="#" class="social-link">📧</a>
+                <a href="#" class="social-link">📞</a>
+            </div>
+            <div class="wavy-text">
+                <span>H</span><span>o</span><span>r</span><span>a</span><span>i</span><span>r</span><span>e</span><span>s</span>
+                <div class="random-hours">
+                    <p>Lundi: 25h - 26h</p>
+                    <p>Mardi: Peut-être</p>
+                    <p>Mercredi: Quand les poules auront des dents</p>
+                    <p>Jeudi: En fonction de la position de Jupiter</p>
+                    <p>Vendredi: Si le chat est d'accord</p>
+                </div>
+            </div>
+            <div class="address-chaos">
+                <p class="glitch-text">42 rue des Bugs</p>
+                <p class="mirror-text">404 Not Found City</p>
+                <p class="rainbow-text">∞∞∞∞∞ ERREUR</p>
+            </div>
+            <div class="legal-nonsense">
+                <marquee class="reverse-text" direction="right">
+                    Tous droits réservés aux licornes invisibles 2023
+                </marquee>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
